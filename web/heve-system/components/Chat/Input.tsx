@@ -15,7 +15,7 @@ interface MsgObj {
 export default function Input({ uid }: { uid: string }) {
     const [msg, setMsg] = useState<MsgObj>({ message: "", imgArray: "", chooseImg: "" });
     const [preview, setPreview] = useState<boolean>(false);
-    const choosePic = (en) => {
+    const choosePic = (en:any) => {
         const files = en.target.files;
         if (files.length > 0) {
             var file = files[0];
