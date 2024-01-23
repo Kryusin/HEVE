@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export default function FeedbackCard({ name, evaluation, message }) {
+export default function FeedbackCard({ name, evaluation, message }: { name: string, evaluation: string, message: string }) {
     return (
         <div className="flex flex-col gap-[30px] px-10 py-10 rounded-[20px] bg-white shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)]">
             <div className="justify-self-stretch flex flex-row justify-between">

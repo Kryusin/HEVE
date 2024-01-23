@@ -19,7 +19,7 @@ import { signOut } from "firebase/auth";
 export default function Page() {
   const [show, setShow] = useState<'Home' | 'Calendar' | 'Chat'>('Home');
   const [phone, setPhone] = useState('');
-  const [user, setUser] = useState<ConfirmationResult>();
+  const [user, setUser] = useState<any>();
   const [error, setError] = useState('');
   const [otp, setOtp] = useState('');
   const [email, setEmail] = useState('');
@@ -81,38 +81,38 @@ export default function Page() {
   //   })
   // }, [auth])
 
-  const changeVerificationId = (verificationId) => {
-    setVerificationId(verificationId);
-  }
+  // const changeVerificationId = (verificationId) => {
+  //   setVerificationId(verificationId);
+  // }
 
-  const clearUser = (userCredential: any) => {
-    setUser(userCredential)
-  }
+  // const clearUser = (userCredential: any) => {
+  //   setUser(userCredential)
+  // }
 
-  const clickCredentialError = (error: string) => {
-    setCredentialError(error);
-  }
+  // const clickCredentialError = (error: string) => {
+  //   setCredentialError(error);
+  // }
 
-  const SendOtp = async () => {
-    phoneCheck(phone, changeVerificationId)
-  }
+  // const SendOtp = async () => {
+  //   phoneCheck(phone, changeVerificationId)
+  // }
 
-  const verifyOtp = async () => {
-    try {
-      const data = await user?.confirm(otp)
-      const Data = await getDocument(uid);
-      setUserData(Data[0]);
-      setDetailData(Data[1]);
-      setUnderTreatment(Data[2]);
-      setDiagnosis(Data[4]);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // const verifyOtp = async () => {
+  //   try {
+  //     const data = await user?.confirm(otp)
+  //     const Data = await getDocument(uid);
+  //     setUserData(Data[0]);
+  //     setDetailData(Data[1]);
+  //     setUnderTreatment(Data[2]);
+  //     setDiagnosis(Data[4]);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   const doLogin = async (e: any) => {
     e.preventDefault();
-    await login(email, password, (msg:string) => setError(msg)).then((r) => {
+    await login(email, password, (msg:string) => setError(msg)).then((r:any) => {
       setUid(r.uid);
       setIsLogin(true);
     }).catch((e) => {

@@ -2,7 +2,7 @@
 import OneWeek from "./OneWeek"
 import { useState, useEffect } from "react";
 
-export default function OneMonth({ month, today, onclickHandler, daylist, nowYear, nowMonth }: { month: Array<string>[], today: string, onclickHandler: React.MouseEventHandler }) {
+export default function OneMonth({ month, today, onclickHandler, daylist, nowYear, nowMonth }: { month: Array<string>[], today: string, onclickHandler: (element: string) => void, daylist: any, nowYear: number, nowMonth: number }) {
 
     return (
         <div className="self-stretch flex flex-col">

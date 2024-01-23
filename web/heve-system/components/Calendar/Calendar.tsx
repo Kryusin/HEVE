@@ -13,7 +13,7 @@ interface Today {
     nextMonth: number,
 }
 
-export default function Calendar({ diagnosis }) {
+export default function Calendar({ diagnosis }:{ diagnosis: any }) {
     const [today, setToday] = useState("");
     const [month, setMonth] = useState<Array<string>[]>([[]]);
     const [todays, setTodays] = useState<Today>({ prevYear: new Date().getFullYear(), prevMonth: new Date().getMonth(), year: new Date().getFullYear(), month: new Date().getMonth() + 1, nextYear: new Date().getFullYear(), nextMonth: new Date().getMonth() + 2 })

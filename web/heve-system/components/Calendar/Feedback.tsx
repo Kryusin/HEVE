@@ -1,8 +1,16 @@
 import Image from "next/image"
 import FeedbackAction from "./FeedbackAction";
 import FeedbackCard from "./FeedbackCard";
+interface Today {
+    prevYear: number,
+    prevMonth: number,
+    year: number,
+    month: number,
+    nextYear: number,
+    nextMonth: number,
+}
 
-export default function Feedback({ todays, today, diagnosis }: { todays: object, today: string }) {
+export default function Feedback({ todays, today, diagnosis }: { todays: Today, today: string, diagnosis: any }) {
     const diseaseFacts: Array<string> = [
         "世界で最も身近な病気は風邪です。",
         "風邪の原因は、ウイルスです。",
@@ -33,7 +41,7 @@ export default function Feedback({ todays, today, diagnosis }: { todays: object,
         "薬物依存症は、薬物に依存する病気です。",
         "薬物依存症は、精神疾患の一種です。",
     ];
-    const fb = diagnosis.map((s, i) => (
+    const fb = diagnosis.map((s:any, i:number) => (
         s.date == `${todays.year}-${todays.month}-${today}` ? (
             <FeedbackCard name={s.name} evaluation={s.evaluation} message={s.message} />
         ) : (

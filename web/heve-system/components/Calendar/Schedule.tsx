@@ -2,7 +2,16 @@ import Image from "next/image";
 import OneMonth from "./OneMonth";
 import { useEffect, useState } from "react"
 
-export default function Schedule({ onclickHandler, today, decrement, increment, todays, month, daylist }: { onclickHandler: React.MouseEventHandler, today: string, decrement: React.MouseEventHandler, increment: React.MouseEventHandler, todays: object, month: Array<string>[] }) {
+interface Today {
+    prevYear: number,
+    prevMonth: number,
+    year: number,
+    month: number,
+    nextYear: number,
+    nextMonth: number,
+}
+
+export default function Schedule({ onclickHandler, today, decrement, increment, todays, month, daylist }: { onclickHandler: (element:string) => void, today: string, decrement: React.MouseEventHandler, increment: React.MouseEventHandler, todays: Today, month: Array<string>[], daylist: any}) {
     const [show, setShow] = useState(false);
     setTimeout(() => {
         setShow(true)

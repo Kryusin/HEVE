@@ -1,7 +1,7 @@
 import InTreatment from "./InTreatment";
 import HistoryDrop from "./HistoryDrop";
 
-export default function Home({ detailData, underTreatment }) {
+export default function Home({ detailData, underTreatment }: {detailData: any, underTreatment: any}) {
 
     return (
         <div className="flex flex-col gap-4">
