@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  overflow: hidden;
+  width: 5px;
+  background: #fafafa;
+
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-piece {
+  background: #eee;
+}
+::-webkit-scrollbar-piece:start {
+  background: #eee;
+}
+::-webkit-scrollbar-thumb {
+  overflow: hidden;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+
+  background: #333;
+}
+::-webkit-scrollbar-corner {
+  overflow: hidden;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+
+  background: #333;
+}

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # Node.js
+  app:
+    build: ./web
+    container_name: app
+    tty: true
+    ports:
+      - 3002:3000
+    stdin_open: true
+    # プロジェクトディレクトリにマウントする
+    volumes:
+      - ./web/heve-system:/app/heve-system
+    working_dir: /app/heve-system
+    environment:
+      - WATCHPACK_POLLING=true
+    command: sh -c "npm i && npm run dev"
