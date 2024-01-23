@@ -1,5 +1,4 @@
 import Image from "next/image"
-import FeedbackAction from "./FeedbackAction";
 import FeedbackCard from "./FeedbackCard";
 interface Today {
     prevYear: number,

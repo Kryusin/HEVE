@@ -14,6 +14,7 @@ interface historyMedicineProps {
         description: string;
         count: number;
         day: number;
+        type: number;
     }[];
 }
 

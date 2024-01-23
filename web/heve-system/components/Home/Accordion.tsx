@@ -6,7 +6,8 @@ interface Medicine {
     name: string,
     description: string,
     count: number,
-    day: number
+    day: number,
+    type: number,
 }
 
 export default function Accordion({ name, start, end, medicine }: { name: string, start: string, end: string, medicine: Array<Medicine> }) {
