@@ -111,14 +111,14 @@ export const getDocument = async (document: string) => {
     if (TreatSnap.exists()) {
         allData[1] = TreatSnap.data().list;
 
-        TreatSnap.data().list.map(async (item, index) => {
+        TreatSnap.data().list.map(async (item:any, index:number) => {
             let diseaseData: any = [];
             const disease = doc(firestore, "Disease", String(item.id));
             const diseaseSnap = await getDoc(disease);
             if (diseaseSnap.exists()) {
 
                 diseaseData = diseaseSnap.data();
-                diseaseSnap.data().medicine.map(async (med, index) => {
+                diseaseSnap.data().medicine.map(async (med:any, index:number) => {
                     const medicine = doc(firestore, "Medicine", String(med.number));
                     const medicineSnap = await getDoc(medicine);
                     if (medicineSnap.exists()) {
@@ -144,8 +144,8 @@ export const getDocument = async (document: string) => {
     if (UnderSnap.exists()) {
 
         allData[2] = UnderSnap.data().list;
-        UnderSnap.data().list.map(async (item, i) => {
-            item.medicine.map(async (med, y) => {
+        UnderSnap.data().list.map(async (item:any, i:number) => {
+            item.medicine.map(async (med:any, y:number) => {
                 const medicine = doc(firestore, "Medicine", String(med.number));
                 const medicineSnap = await getDoc(medicine);
                 if (medicineSnap.exists()) {
@@ -167,7 +167,7 @@ export const getDocument = async (document: string) => {
     const DiagSnap = await getDoc(DiagRef);
     if (DiagSnap.exists()) {
         allData[4] = DiagSnap.data().list;
-        DiagSnap.data().list.map(async (item, i) => {
+        DiagSnap.data().list.map(async (item:any, i:number) => {
             const date = new Date(item.date.seconds * 1000);
             allData[4][i].date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         })
@@ -176,7 +176,7 @@ export const getDocument = async (document: string) => {
     return allData;
 }
 
-export const submitMessage = async (message: string, uid: string, list) => {
+export const submitMessage = async (message: string, uid: string, list:any) => {
     const info = {
         list: [
             ...list,
@@ -191,7 +191,7 @@ export const submitMessage = async (message: string, uid: string, list) => {
     await updateDoc(ChatRef, info);
 }
 
-export const sendMessage = async (e, message: { message: string, imgArray: string }, uid: string) => {
+export const sendMessage = async (e:any, message: { message: string, imgArray: string }, uid: string) => {
     e.preventDefault();
     try {
         const dbRef = ref(db, 'chat');
@@ -214,15 +214,15 @@ export const sendMessage = async (e, message: { message: string, imgArray: strin
     }
 }
 
-export const getNextDay = (nowDay, diagnosis) => {
+export const getNextDay = (nowDay:Date, diagnosis:any) => {
     var nextdate = 0;
     var flag = false;
-    diagnosis.map(dia => {
+    diagnosis.map((dia:any) => {
         const next = new Date(dia.date);
         if (!flag) {
 
             if (nowDay < next) {
-                nextdate = Math.floor((next - nowDay) / (1000 * 60 * 60 * 24));
+                nextdate = Math.floor((next.getTime() - nowDay.getTime()) / (1000 * 60 * 60 * 24));
                 flag = true;
             }
         }
