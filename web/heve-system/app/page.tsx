@@ -6,6 +6,7 @@ import Calendar from "@/components/Calendar/Calendar";
 import Chat from "@/components/Chat/Chat";
 
 import { useState, useEffect } from "react";
+import Image from 'next/image'
 import { push, ref, onChildAdded, onValue } from '@firebase/database'
 import { Button, TextField } from '@mui/material';
 import 'react-phone-input-2/lib/style.css';
@@ -37,6 +38,9 @@ export default function Page() {
   const [credentialError, setCredentialError] = useState('');
   const [phoneCheckError, setPhoneCheckError] = useState('');
   const [enlargedPhoto, setEnlargedPhoto] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hidden, setHidden] = useState<boolean>(false);
+  const [deleteDisp, setDeleteDisp] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async(authUser) => {
@@ -69,6 +73,13 @@ export default function Page() {
       return;
     }
   }, [])
+
+  // useEffect(() => {
+  //   const logo = document.getElementsByClassName('logo_fadein');
+  //   setTimeout(function() {
+  //     logo.fadeIn(1000);
+  //   }, 500)
+  // }, [])
   // useEffect(() => {
   //   // ログイン状態をウォッチ
   //   let unsubscribe = auth.onAuthStateChanged((user: any) => {
@@ -139,8 +150,18 @@ export default function Page() {
     })
   }
 
+  setTimeout(() => {
+    setHidden(true);
+    setTimeout(() => {
+      setDeleteDisp(true);
+    }, 2000);
+  }, 3000)
+  
   return (
-    <div>
+      <div>
+      <div className={`bg-white fixed top-0 left-0 h-full z-[99999] w-full ${hidden ? 'animate-[zoomOut_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]' : 'animate-[zoomIn_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]'} ${deleteDisp && 'hidden'}`}>
+        <p className="fixed left-[380%] md:left-[43%] top-[45%] w-[280px]"><Image src="/logo.svg" alt="" width={150} height={150} /></p>
+      </div>
       {!user ? (
         // isLogin ? (
         //   <div className="h-screen w-screen flex flex-col gap-10 justify-center items-center">
@@ -152,7 +173,7 @@ export default function Page() {
         //     <button onClick={() => verifyCode(verificationId, verificationCode, clearUser, clickCredentialError)} className="h-14 bg-[#FFAF00] rounded-xl">認証する</button>
         //   </div>
         // ) : (
-          <form className="flex justify-center items-center">
+          <form className={`flex justify-center items-center ${hidden && 'z-10'}`}>
             <div className="h-screen w-screen flex flex-col gap-10 justify-center itemscenter px-5 max-w-[450px]">
               {error && <p className="text-red-500">{error}</p>}
               <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} autoComplete="off" placeholder="email" className="border-2 border-solid border-black rounded-lg px-2 py-3" />
@@ -173,7 +194,7 @@ export default function Page() {
             ) : (show == 'Calendar' ? (
               <Calendar diagnosis={diagnosis} />
             ) : (
-              <Chat messages={messages} uid={uid} enlargedFlag={enlargedPhoto} changeEnlargedFlag={() => setEnlargedPhoto(!enlargedPhoto)} />
+              <Chat messages={messages} uid={uid} />
             ))
             }
           </main>
