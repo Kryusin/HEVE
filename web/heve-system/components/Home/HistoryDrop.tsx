@@ -18,7 +18,7 @@ interface historyMedicineProps {
     }[];
 }
 
-export default function HistoryDrop({ historyMedicine }: { historyMedicine: historyMedicineProps[] }) {
+export default function HistoryDrop({ historyMedicine,size }: { historyMedicine: historyMedicineProps[], size:number }) {
     const [show, setShow] = useState<boolean>(false);
     setTimeout(() => {
         setShow(true);
@@ -31,7 +31,7 @@ export default function HistoryDrop({ historyMedicine }: { historyMedicine: hist
                 <p>治療履歴</p>
             </div>
             {show ? (
-                historyMedicine.map((h, i) => <Accordion name={h.name} start={h.start} end={h.end} medicine={h.medicine} key={h.name} />)
+                historyMedicine.map((h, i) => <Accordion name={h.name} start={h.start} end={h.end} medicine={h.medicine} size={size} key={h.name} />)
             ) : (
                 historyMedicine.map((h, i) => <HistoryDropSkelton key={h.name} />)
             )}

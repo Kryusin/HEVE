@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 
-export default function Header({ handleClick, information, logout }: { handleClick: (type: 'Home' | 'Calendar' | 'Chat') => void, information: { firstName: string, lastName: string, age: number }, logout:() => void }) {
+export default function Header({ handleClick, information, logout, changeSize }: { handleClick: (type: 'Home' | 'Calendar' | 'Chat') => void, information: { firstName: string, lastName: string, age: number }, logout:() => void, changeSize: (i:number) => void }) {
     const [show, setShow] = useState<boolean>(false);
 
     const clickHandler = () => {
@@ -51,6 +51,12 @@ export default function Header({ handleClick, information, logout }: { handleCli
                 <b id="Chat" className="rounded-full px-3 py-1 hover:bg-[#E8E8E8] text-center cursor-pointer" onClick={() => handleClick('Chat')}>チャット</b>
                 <b id="Calendar" className="rounded-full px-3 py-1 hover:bg-[#E8E8E8] text-center cursor-pointer" onClick={() => handleClick('Calendar')}>カレンダー</b>
                 <b id="Calendar" className="rounded-full px-3 py-1 hover:bg-[#E8E8E8] text-center cursor-pointer" onClick={logout}>ログアウト</b>
+                <select name="size" id="" onChange={(e) => changeSize(Number(e.target.value))}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
             </div>
         </header>
     );

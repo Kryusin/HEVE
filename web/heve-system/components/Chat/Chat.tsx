@@ -32,7 +32,7 @@ export default function Chat({ messages, uid }: { messages: { type: number, msg:
                     <div className="h-[600px] md:h-[500px] self-stretch justify-self-stretch flex-auto flex flex-col gap-2 overflow-y-scroll px-4 py-4">
                         {messages.map((message, i) => (
                             message.sender == uid ? (
-                                <div className="self-stretch flex flex-row justify-end" key={message.msg}>
+                                <div className="self-stretch flex flex-row justify-end" key={i}>
                                     {message.type ? (
                                         <div className="max-w-[400px] rounded-2xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] overflow-hidden">
                                             <Image src={message.msg} alt="" width={0} height={0} className="w-[200px] h-[200px]" onClick={changeEnlargedFlag} />

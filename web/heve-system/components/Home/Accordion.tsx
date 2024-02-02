@@ -10,7 +10,7 @@ interface Medicine {
     type: number,
 }
 
-export default function Accordion({ name, start, end, medicine }: { name: string, start: string, end: string, medicine: Array<Medicine> }) {
+export default function Accordion({ name, start, end, medicine, size }: { name: string, start: string, end: string, medicine: Array<Medicine>, size:number }) {
     const [show, setShow] = useState<boolean>(false)
     const onclick = () => {
         setShow(!show);

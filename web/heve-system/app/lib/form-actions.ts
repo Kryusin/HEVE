@@ -1,7 +1,7 @@
 import { RecaptchaVerifier, signInWithPhoneNumber, signInWithEmailAndPassword, PhoneAuthProvider, signInWithCredential, UserCredential } from 'firebase/auth';
 import { auth, firestore, initializeFirebaseApp } from '../firebase/setup';
 import { db } from '../firebase/setup';
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, query, Timestamp } from "firebase/firestore";
 import { push, ref } from '@firebase/database'
 
 initializeFirebaseApp();
@@ -228,4 +228,34 @@ export const getNextDay = (nowDay:Date, diagnosis:any) => {
         }
     })
     return nextdate + 1;
+}
+
+export const updateGo = async(go:boolean, uid:string, date:Date) => {
+    const ref = doc(firestore, "Diagnosis", uid);
+    const DiagSnap = await getDoc(ref);
+    if (DiagSnap.exists()) {
+        const comp = DiagSnap.data().list.map(async (item:any) => {
+            // console.log(`${item.date.seconds} == ${Math.floor(date.getTime() / 1000)} : ${item.date.seconds === Math.floor(date.getTime() / 1000)}`);
+            if(item.date.seconds === Math.floor(date.getTime() / 1000)) {
+                return {
+                    ...item,
+                    go: go
+                }
+            } else {
+                return item;
+            }
+        })
+        var data:Array<any> = [];
+        await comp.forEach((c:any) => {
+            c.then((res:any) => {
+                if(res != undefined) {
+                    data.push(res);
+                }
+            })
+        })
+
+        if(data.length > 0) {
+            await updateDoc(ref, {list: data})
+        }
+    }
 }

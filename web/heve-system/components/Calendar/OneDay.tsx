@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useState } from "react"
 import React from "react";
 
 export default function OneDay({ day, index, onclickHandler, today, daylist, nowYear, nowMonth }: { day: string, index: number, onclickHandler: (element:string) => void, today: string, daylist: any, nowYear: number, nowMonth: number}) {
@@ -16,6 +15,14 @@ export default function OneDay({ day, index, onclickHandler, today, daylist, now
         onclickHandler(day);
     }
 
+    // daylist.map((d:any, i:number) => {
+    //     console.log(`${d.date} == ${nowYear}-${nowMonth}-${day}`)
+        
+    //     d.date == `${nowYear}-${nowMonth}-${day}` && (
+    //         console.log(d.date)
+    //     )
+    // })
+
     return (
         <>
             {day != "" ? (
@@ -23,7 +30,11 @@ export default function OneDay({ day, index, onclickHandler, today, daylist, now
                     <>{day}
                         {daylist.map((d:any, i:number) => (
                             d.date == `${nowYear}-${nowMonth}-${day}` && (
-                                <React.Fragment key={i}><br />〇</React.Fragment>
+                                d.go ? (
+                                    <React.Fragment key={i}><br />〇</React.Fragment>
+                                    ): (
+                                    <React.Fragment key={i}><br />×</React.Fragment>
+                                )
                             )
                         ))}
                     </>

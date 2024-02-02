@@ -13,6 +13,9 @@ interface Today {
 
 export default function Schedule({ onclickHandler, today, decrement, increment, todays, month, daylist }: { onclickHandler: (element:string) => void, today: string, decrement: React.MouseEventHandler, increment: React.MouseEventHandler, todays: Today, month: Array<string>[], daylist: any}) {
     const [show, setShow] = useState(false);
+    // useEffect(() => {
+    //     setShow(true)
+    // }, [])
     setTimeout(() => {
         setShow(true)
     }, 2000)

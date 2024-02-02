@@ -8,14 +8,16 @@ import Chat from "@/components/Chat/Chat";
 import { useState, useEffect } from "react";
 import Image from 'next/image'
 import { push, ref, onChildAdded, onValue } from '@firebase/database'
-import { Button, TextField } from '@mui/material';
-import 'react-phone-input-2/lib/style.css';
+// import { Button, TextField } from '@mui/material';
+// import 'react-phone-input-2/lib/style.css';
 
-import { db } from "@/app/firebase/setup";
-import { auth } from "./firebase/setup";
-import { login, getDocument, getNextDay, phoneCheck, verifyCode } from "./lib/form-actions";
+import { db, initializeFirebaseApp, auth, firestore } from "@/app/firebase/setup";
+import { login, getDocument, getNextDay, phoneCheck, verifyCode, updateGo } from "./lib/form-actions";
 import { UserDataProps } from "./interface/interface";
 import { signOut } from "firebase/auth";
+import { doc, onSnapshot, getDoc, collection } from "firebase/firestore";
+
+initializeFirebaseApp();
 
 export default function Page() {
   const [show, setShow] = useState<'Home' | 'Calendar' | 'Chat'>('Home');
@@ -41,6 +43,9 @@ export default function Page() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hidden, setHidden] = useState<boolean>(false);
   const [deleteDisp, setDeleteDisp] = useState<boolean>(false);
+  const [size, setSize] = useState<number>(1);
+  const [go, setGo] = useState<boolean>(false);
+  const [date, setDate] = useState<Date>(new Date());
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async(authUser) => {
@@ -61,6 +66,23 @@ export default function Page() {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    try {
+      const ref = collection(firestore, "Diagnosis", uid);
+      const arr = []
+      return onSnapshot(ref, (doc) => {
+        const diagnosis = doc.docs.map((d) => d.data().list);
+        const data = diagnosis[0].map((d:any) => {
+          const date = new Date(d.date.seconds * 1000);
+          return {...d, date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`}
+        })
+        setDiagnosis(data);
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  }, [])
 
   useEffect(() => {
     try {
@@ -155,8 +177,17 @@ export default function Page() {
     setTimeout(() => {
       setDeleteDisp(true);
     }, 2000);
-  }, 3000)
-  
+  }, 3000);
+
+  // const valueChange = (d:Date) => {
+  //   setGo(!go);
+  //   setDate(d);
+  // }
+
+  // useEffect(() => {
+  //   updateGo(go,uid,date);
+  // }, [date])
+
   return (
       <div>
       <div className={`bg-white fixed top-0 left-0 h-full z-[99999] w-full ${hidden ? 'animate-[zoomOut_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]' : 'animate-[zoomIn_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]'} ${deleteDisp && 'hidden'}`}>
@@ -186,13 +217,13 @@ export default function Page() {
         // )
       ) : (
         <div className="overflow-x-hidden">
-          <Header handleClick={handleClick} information={userData} logout={logout} />
-          <main className="w-screen flex flex-col gap-9 items-center pt-2">
+          <Header handleClick={handleClick} information={userData} logout={logout} changeSize={(i:number) => setSize(i)} />
+          <main className={`w-screen flex flex-col gap-9 items-center pt-2 ${size == 1 ? "text-base" : size==2 ? "text-lg" : size==3 ? "text-xl" : size==4 && "text-[22px]"}`}>
             <DaysCount diagnosis={diagnosis} />
             {show == 'Home' ? (
-              <Home detailData={detailData} underTreatment={underTreatment} />
+              <Home detailData={detailData} underTreatment={underTreatment} size={size} />
             ) : (show == 'Calendar' ? (
-              <Calendar diagnosis={diagnosis} />
+              <Calendar diagnosis={diagnosis} size={size} uid={uid} />
             ) : (
               <Chat messages={messages} uid={uid} />
             ))

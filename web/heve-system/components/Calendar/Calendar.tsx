@@ -13,7 +13,9 @@ interface Today {
     nextMonth: number,
 }
 
-export default function Calendar({ diagnosis }:{ diagnosis: any }) {
+export default function Calendar({ diagnosis, size, uid }:{ diagnosis: any, size:number, uid:string }) {
+    // console.log(diagnosis);
+    
     const [today, setToday] = useState("");
     const [month, setMonth] = useState<Array<string>[]>([[]]);
     const [todays, setTodays] = useState<Today>({ prevYear: new Date().getFullYear(), prevMonth: new Date().getMonth(), year: new Date().getFullYear(), month: new Date().getMonth() + 1, nextYear: new Date().getFullYear(), nextMonth: new Date().getMonth() + 2 })
@@ -59,7 +61,7 @@ export default function Calendar({ diagnosis }:{ diagnosis: any }) {
     return (
         <div className="min-w-[353px] h-screen flex flex-col gap-4">
             <Schedule onclickHandler={onclickHandler} today={today} decrement={decrement} increment={increment} todays={todays} month={month} daylist={diagnosis} />
-            <Feedback todays={todays} today={today} diagnosis={diagnosis} />
+            <Feedback todays={todays} today={today} diagnosis={diagnosis} size={size} uid={uid} />
         </div>
     )
 };
