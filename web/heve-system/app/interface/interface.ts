@@ -28,7 +28,7 @@ export interface historyMedicineProps {
         count: number;
         day: number;
         type: number;
-    };
+    }[];
 }
 
 export interface Today {

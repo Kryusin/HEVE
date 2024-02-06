@@ -6,7 +6,7 @@ import Accordion from "./Accordion";
 import HistoryDropSkelton from "./HistoryDropSkelton";
 import { historyMedicineProps } from "@/app/interface/interface";
 
-export default function HistoryDrop({ historyMedicine,size }: { historyMedicine: Array<historyMedicineProps>, size:number }) {
+export default function HistoryDrop({ historyMedicine,size }: { historyMedicine: historyMedicineProps[], size:number }) {
     const [show, setShow] = useState<boolean>(false);
     setTimeout(() => {
         setShow(true);
