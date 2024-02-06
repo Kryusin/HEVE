@@ -15,7 +15,7 @@ export interface Medicine {
     description: string;
     count: number;
     day: number;
-    type:number;
+    type?:number;
 }
 
 export interface historyMedicineProps {
