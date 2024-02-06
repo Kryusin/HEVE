@@ -2,7 +2,7 @@ import { getNextDay } from "@/app/lib/form-actions";
 import { useState, useEffect } from "react";
 
 export default function DaysCount({ diagnosis }: {diagnosis: any}) {
-    const [days, setDays] = useState(0);
+    const [days, setDays] = useState<number>(0);
     const [show, setShow] = useState<boolean>(false);
     setTimeout(() => {
         setDays(getNextDay(new Date(), diagnosis))

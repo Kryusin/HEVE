@@ -2,18 +2,7 @@ import Input from "./Input";
 import Image from "next/image";
 import { useEffect, useState } from "react"
 import ChatSkelton from "./ChatSkelton";
-
-interface ChatProps {
-    msg: string;
-    sender: number;
-    type: number;
-}
-
-interface MessageProps {
-    type: number;
-    msg: string;
-    sender: string;
-}
+import { ChatProps, MessageProps } from "@/app/interface/interface";
 
 export default function Chat({ messages, uid }: { messages: { type: number, msg: string, sender: string }[], uid: string }) {
     const [show, setShow] = useState<boolean>(false);

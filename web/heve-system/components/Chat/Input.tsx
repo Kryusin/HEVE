@@ -2,16 +2,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react";
 import { sendMessage } from "@/app/lib/form-actions"
 import { useDebouncedCallback } from "use-debounce";
-
-interface PreviewProps {
-    imageData: string;
-}
-
-interface MsgObj {
-    message: string,
-    imgArray: string
-    chooseImg: string
-}
+import { MsgObj, PreviewProps } from "@/app/interface/interface";
 
 export default function Input({ uid }: { uid: string }) {
     const [msg, setMsg] = useState<MsgObj>({ message: "", imgArray: "", chooseImg: "" });

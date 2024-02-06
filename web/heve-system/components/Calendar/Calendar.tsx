@@ -3,20 +3,12 @@ import Feedback from "./Feedback";
 import Schedule from "./Schedule";
 import { useState, useEffect } from 'react';
 import getMonth from "@/app/lib/datetime";
-
-interface Today {
-    prevYear: number,
-    prevMonth: number,
-    year: number,
-    month: number,
-    nextYear: number,
-    nextMonth: number,
-}
+import { Today } from "@/app/interface/interface";
 
 export default function Calendar({ diagnosis, size, uid }:{ diagnosis: any, size:number, uid:string }) {
     // console.log(diagnosis);
     
-    const [today, setToday] = useState("");
+    const [today, setToday] = useState<string>("");
     const [month, setMonth] = useState<Array<string>[]>([[]]);
     const [todays, setTodays] = useState<Today>({ prevYear: new Date().getFullYear(), prevMonth: new Date().getMonth(), year: new Date().getFullYear(), month: new Date().getMonth() + 1, nextYear: new Date().getFullYear(), nextMonth: new Date().getMonth() + 2 })
 

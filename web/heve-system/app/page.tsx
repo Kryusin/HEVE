@@ -70,7 +70,6 @@ export default function Page() {
   useEffect(() => {
     try {
       const ref = collection(firestore, "Diagnosis", uid);
-      const arr = []
       return onSnapshot(ref, (doc) => {
         const diagnosis = doc.docs.map((d) => d.data().list);
         const data = diagnosis[0].map((d:any) => {
@@ -191,7 +190,7 @@ export default function Page() {
   return (
       <div>
       <div className={`bg-white fixed top-0 left-0 h-full z-[99999] w-full ${hidden ? 'animate-[zoomOut_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]' : 'animate-[zoomIn_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]'} ${deleteDisp && 'hidden'}`}>
-        <p className="fixed left-[380%] md:left-[43%] top-[45%] w-[280px]"><Image src="/logo.svg" alt="" width={150} height={150} /></p>
+        <p className="fixed left-[33%] md:left-[43%] top-[45%] w-[280px]"><Image src="/logo.svg" alt="" width={150} height={150} /></p>
       </div>
       {!user ? (
         // isLogin ? (

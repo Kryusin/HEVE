@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import React from 'react'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <link rel='icon' href='/logo.svg' />
+        {/* <link rel="apple-touch-icon" href="/logo-apple-icon.svg" /> */}
       </head>
       <body>{children}</body>
     </html>

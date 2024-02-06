@@ -3,20 +3,7 @@ import FeedbackCard from "./FeedbackCard";
 import InputField from "./inputField";
 import { useEffect, useState } from "react";
 // import {diseaseFacts} from "@/app/lib/sample";
-
-interface Today {
-    prevYear: number,
-    prevMonth: number,
-    year: number,
-    month: number,
-    nextYear: number,
-    nextMonth: number,
-}
-
-interface Trivia {
-    title: string;
-    description: string;
-}
+import { Trivia, Today } from "@/app/interface/interface";
 
 export default function Feedback({ todays, today, diagnosis, size, uid }: { todays: Today, today: string, diagnosis: any, size:number, uid:string }) {
 
@@ -157,15 +144,15 @@ export default function Feedback({ todays, today, diagnosis, size, uid }: { toda
         fb = diagnosis.map((s:any, i:number) => {
             return s.date == `${todays.year}-${todays.month}-${today}` ? (
                 s.go ? (
-                    <FeedbackCard name={s.name} evaluation={s.evaluation} message={s.message} size={size} />
+                    <FeedbackCard name={s.name} evaluation={s.evaluation} message={s.message} size={size} key={s.date} />
                 ): (
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-row gap-2" key={s.date}>
                         <Image src={"/Warning.svg"} alt="" width={40} height={40}></Image>
                         <div className={`font-bold ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"}`}>この日は通院しません。<br />通院するのであれば上記のボタンを押してください。</div>
                     </div>
                 )
             ) : (
-                <div className={`flex flex-col gap-[25px] justify-center items-center p-6 bg-white shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] rounded-[20px] ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"}`}>
+                <div className={`flex flex-col gap-[25px] justify-center items-center p-6 bg-white shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] rounded-[20px] ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"}`} key={s.date}>
                     <Image src={"/Info.svg"} alt="" width={30} height={30}></Image>
                     <p className={`font-bold ${size==1 ? "text-base" : size==2 ? "text-lg" : size==3 ? "text-xl" : size==4 && "text-2xl"}`}>{diseaseFacts[Number(today) - 1].title}</p>
                     <p className={`self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"}`}>{diseaseFacts[Number(today) - 1].description}</p>

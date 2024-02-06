@@ -1,14 +1,7 @@
 'use client';
 import TableColum from "./TableColum";
 import { useState } from "react";
-
-interface Medicine {
-    name: string,
-    description: string,
-    count: number,
-    day: number,
-    type: number,
-}
+import { Medicine } from "@/app/interface/interface";
 
 export default function Accordion({ name, start, end, medicine, size }: { name: string, start: string, end: string, medicine: Array<Medicine>, size:number }) {
     const [show, setShow] = useState<boolean>(false)

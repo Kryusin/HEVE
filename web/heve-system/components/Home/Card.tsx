@@ -1,12 +1,7 @@
 import Image from "next/image"
 import { useState } from "react";
+import { Medicine } from "@/app/interface/interface";
 
-interface Medicine {
-    name: string;
-    description: string;
-    count: number;
-    day: number;
-}
 
 export default function Card({ name, evaluation, medicine, size }: { name: string, evaluation: string, medicine: Array<Medicine>, size:number }) {
     const [show, setShow] = useState<boolean>(false);

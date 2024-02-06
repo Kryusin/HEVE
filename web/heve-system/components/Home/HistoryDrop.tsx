@@ -4,21 +4,9 @@ import Image from "next/image";
 import TableColum from "./TableColum";
 import Accordion from "./Accordion";
 import HistoryDropSkelton from "./HistoryDropSkelton";
+import { historyMedicineProps } from "@/app/interface/interface";
 
-interface historyMedicineProps {
-    name: string;
-    start: string;
-    end: string;
-    medicine: {
-        name: string;
-        description: string;
-        count: number;
-        day: number;
-        type: number;
-    }[];
-}
-
-export default function HistoryDrop({ historyMedicine,size }: { historyMedicine: historyMedicineProps[], size:number }) {
+export default function HistoryDrop({ historyMedicine,size }: { historyMedicine: Array<historyMedicineProps>, size:number }) {
     const [show, setShow] = useState<boolean>(false);
     setTimeout(() => {
         setShow(true);
