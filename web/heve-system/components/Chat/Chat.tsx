@@ -6,9 +6,9 @@ import { ChatProps, MessageProps } from "@/app/interface/interface";
 
 export default function Chat({ messages, uid }: { messages: { type: number, msg: string, sender: string }[], uid: string }) {
     const [show, setShow] = useState<boolean>(false);
-    const [enlargedFlag, setEnlargedFlag] = useState<boolean>(false);
-    const changeEnlargedFlag = () => {
-        setEnlargedFlag(!enlargedFlag);
+    const [enlargedFlag, setEnlargedFlag] = useState<string>("");
+    const changeEnlargedFlag = (data:string) => {
+        setEnlargedFlag(data);
     }
     setTimeout(() => {
         setShow(true);
@@ -24,10 +24,10 @@ export default function Chat({ messages, uid }: { messages: { type: number, msg:
                                 <div className="self-stretch flex flex-row justify-end" key={i}>
                                     {message.type ? (
                                         <div className="max-w-[400px] rounded-2xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-                                            <Image src={message.msg} alt="" width={0} height={0} className="w-[200px] h-[200px]" onClick={changeEnlargedFlag} />
-                                            {enlargedFlag && (
+                                            <Image src={message.msg} alt="" width={0} height={0} className="w-[200px] h-[200px]" onClick={() => changeEnlargedFlag(message.msg)} />
+                                            {enlargedFlag.length != 0 && (
                                                 <div className="w-screen h-screen bg-gray-200/60 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                                    <Image src={messages[i].msg} alt="" width={0} height={0} className="w-[400px] h-[400px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" onClick={changeEnlargedFlag} />
+                                                    <Image src={enlargedFlag} alt="" width={0} height={0} className="w-[400px] h-[400px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" onClick={() => changeEnlargedFlag("")} />
                                                 </div>
                                             )}
                                         </div>
