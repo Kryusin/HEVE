@@ -11,19 +11,21 @@ export default function Card({ name, evaluation, medicine, size }: { name: strin
     }, 2000);
     return (
         show ? (
-            <div className="flex flex-col gap-4 p-6 shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] rounded-2xl">
+            <div className="flex flex-col gap-4 p-6 shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] rounded-2xl min-w-[333px] max-w-[333px]">
                 <div className="justify-self-stretch flex flex-row justify-between ">
                     <b className="text-2xl">{name}</b>
                     <b className="text-2xl">{evaluation}</b>
                 </div>
-                {medicine.map(m => (
-                    <div className={`justify-self-stretch flex flex-row justify-between gap-2 text-center ${size==1 ? "text-xs" : size==2 ? "text-sm" : size==3 ? "text-base" : size==4 && "text-lg"}`} key={m.name}>
-                        <p className="max-w-[110px]">{m.name}</p>
-                        <p className="flex-1 max-w-[354px]">{m.description}</p>
-                        <p>{m.count}錠/日</p>
-                        <p>{m.day}日間</p>
-                    </div>
-                ))}
+                <div className="justify-self-stretch flex flex-col gap-6">
+                    {medicine.map(m => (
+                        <div className={`justify-self-stretch flex flex-col lg:flex-row justify-between gap-2 text-center lg:pb-3 lg:border-b lg:border-gray-300 ${size==1 ? "text-xs" : size==2 ? "text-sm" : size==3 ? "text-base" : size==4 && "text-lg"}`} key={m.name}>
+                            <p className="lg:max-w-[110px] font-bold lg:font-normal pb-3 border-b border-gray-300 lg:border-none">{m.name}</p>
+                            <p className="flex-1 max-w-[354px]">{m.description}</p>
+                            <p>{m.count}錠/日</p>
+                            <p>{m.day}日間</p>
+                        </div>
+                    ))}
+                </div>
                 <div className="flex flex-col gap-[10px]">
                     <div className="flex flex-row gap-1">
                         <Image src={"/Headset.svg"} alt="" width={24} height={24} />

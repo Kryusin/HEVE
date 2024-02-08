@@ -24,10 +24,10 @@ export default function Chat({ messages, uid }: { messages: { type: number, msg:
                                 <div className="self-stretch flex flex-row justify-end" key={i}>
                                     {message.type ? (
                                         <div className="max-w-[400px] rounded-2xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-                                            <Image src={message.msg} alt="" width={0} height={0} className="w-[200px] h-[200px]" onClick={() => changeEnlargedFlag(message.msg)} />
+                                            <Image src={message.msg} alt="" width={0} height={0} className="w-[200px] h-[200px] object-cover" onClick={() => changeEnlargedFlag(message.msg)} />
                                             {enlargedFlag.length != 0 && (
                                                 <div className="w-screen h-screen bg-gray-200/60 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                                                    <Image src={enlargedFlag} alt="" width={0} height={0} className="w-[400px] h-[400px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" onClick={() => changeEnlargedFlag("")} />
+                                                    <Image src={enlargedFlag} alt="" width={0} height={0} className="w-[400px] h-[400px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-contain" onClick={() => changeEnlargedFlag("")} />
                                                 </div>
                                             )}
                                         </div>
@@ -41,7 +41,7 @@ export default function Chat({ messages, uid }: { messages: { type: number, msg:
                                 <div className="flex flex-row justify-start" key={i}>
                                     {message.type ? (
                                         <div className="max-w-[400px] rounded-2xl shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] overflow-hidden">
-                                            <Image src={message.msg} alt="" width={0} height={0} className="w-[200px] h-[200px]" />
+                                            <Image src={message.msg} alt="" objectFit="cover" width={0} height={0} className="w-[200px] h-[200px]" />
                                         </div>
                                     ) : (
                                         <div className="max-w-[400px] rounded-2xl px-4 py-2 shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] bg-white">

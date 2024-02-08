@@ -1,3 +1,4 @@
+import { historyMedicineProps } from '@/app/interface/interface';
 export interface ChatProps {
     msg: string;
     sender: number;
@@ -65,4 +66,9 @@ export interface MsgObj {
     message: string,
     imgArray: string
     chooseImg: string
+}
+
+export interface classifictionProps {
+    year: number;
+    data: Array<historyMedicineProps>
 }

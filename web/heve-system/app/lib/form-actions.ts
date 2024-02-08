@@ -1,3 +1,4 @@
+import { metadata } from './../layout';
 import { RecaptchaVerifier, signInWithPhoneNumber, signInWithEmailAndPassword, PhoneAuthProvider, signInWithCredential, UserCredential } from 'firebase/auth';
 import { auth, firestore, initializeFirebaseApp } from '../firebase/setup';
 import { db } from '../firebase/setup';
@@ -118,19 +119,21 @@ export const getDocument = async (document: string) => {
             if (diseaseSnap.exists()) {
 
                 diseaseData = diseaseSnap.data();
+
                 diseaseSnap.data().medicine.map(async (med:any, index:number) => {
                     const medicine = doc(firestore, "Medicine", String(med.number));
                     const medicineSnap = await getDoc(medicine);
                     if (medicineSnap.exists()) {
                         delete diseaseData.medicine[index].number;
+                        diseaseData.name = diseaseSnap.data().name;
                         diseaseData.medicine[index].name = medicineSnap.data().name;
                         diseaseData.medicine[index].description = medicineSnap.data().description;
                     }
                 })
             }
             delete allData[1][index].id;
-            allData[1][index].name = diseaseData.name;
             allData[1][index].medicine = diseaseData.medicine;
+            allData[1][index].name = diseaseData.name;
             const startDate = new Date(allData[1][index].start.seconds * 1000);
             const endDate = new Date(allData[1][index].end.seconds * 1000);
             allData[1][index].start = startDate.getFullYear() + "/" + (startDate.getMonth() + 1) + "/" + startDate.getDate();

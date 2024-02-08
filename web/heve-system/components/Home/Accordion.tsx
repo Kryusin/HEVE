@@ -13,7 +13,7 @@ export default function Accordion({ name, start, end, medicine, size }: { name: 
 
 
     return (
-        <div className="mx-3 relative rounded-lg min-w-[329px] min-h-[40px]">
+        <div className="self-stretch mx-3 relative rounded-lg min-w-[369.6px] min-h-[40px]">
             <div className={`transition-all ease-in-out duration-300 w-full absolute top-0 left-0 flex flex-row justify-between items-center bg-[#FFAF00] px-3 py-2 delay-75 z-50 rounded-lg ${show ? "shadow-none" : "shadow-xl"}`} onClick={onclick}>
                 <p>{name}</p>
                 <div id="arrow" className={`w-3 h-3 border-r-2 border-b-2 border-black rounded-sm duration-300 ${!show ? "rotate-45" : "-rotate-[135deg]"}`} />

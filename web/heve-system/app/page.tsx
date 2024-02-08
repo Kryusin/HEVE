@@ -187,8 +187,13 @@ export default function Page() {
   //   updateGo(go,uid,date);
   // }, [date])
 
+  useEffect(() => {
+    console.log(detailData);
+    
+  }, [detailData])
+
   return (
-      <div>
+      <div className="h-full">
       <div className={`bg-white fixed top-0 left-0 h-full z-[99999] w-full ${hidden ? 'animate-[zoomOut_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]' : 'animate-[zoomIn_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]'} ${deleteDisp && 'hidden'}`}>
         <p className="fixed left-[33%] md:left-[43%] top-[45%] w-[280px]"><Image src="/logo.svg" alt="" width={150} height={150} /></p>
       </div>
@@ -215,7 +220,7 @@ export default function Page() {
           </form>
         // )
       ) : (
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden h-full">
           <Header handleClick={handleClick} information={userData} logout={logout} changeSize={(i:number) => setSize(i)} />
           <main className={`w-screen flex flex-col gap-9 items-center pt-2 ${size == 1 ? "text-base" : size==2 ? "text-lg" : size==3 ? "text-xl" : size==4 && "text-[22px]"}`}>
             <DaysCount diagnosis={diagnosis} />
