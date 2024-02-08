@@ -1,4 +1,3 @@
-import { historyMedicineProps } from '@/app/interface/interface';
 export interface ChatProps {
     msg: string;
     sender: number;
