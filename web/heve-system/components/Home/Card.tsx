@@ -35,7 +35,7 @@ export default function Card({ name, evaluation, medicine, size }: { name: strin
                 </div>
             </div >
         ) : (
-            <div className={`flex flex-col gap-4 p-6 shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] rounded-2xl ${shimmer}`}>
+            <div className={`flex flex-col gap-4 p-6 shadow-[0px_4px_24px_0px_rgba(0,0,0,0.25)] rounded-2xl ${shimmer} w-[333px]`}>
                 <div className="justify-self-stretch flex flex-row justify-between">
                     <div className="text-2xl w-20 bg-gray-200 h-7 rounded-full" />
                     <div className="text-2xl w-5 bg-gray-200 h-7 rounded-full" />
@@ -53,9 +53,9 @@ export default function Card({ name, evaluation, medicine, size }: { name: strin
                         <Image src={"/Headset.svg"} alt="" width={24} height={24} />
                         <b className="text-sm">先生から</b>
                     </div>
-                    <div className={`justify-self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"} min-w-[550px] max-w-[550px] bg-gray-200 h-4 rounded-full`}></div>
-                    <div className={`justify-self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"} min-w-[550px] max-w-[550px] bg-gray-200 h-4 rounded-full`}></div>
-                    <div className={`justify-self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"} min-w-[550px] max-w-[550px] bg-gray-200 h-4 rounded-full`}></div>
+                    <div className={`self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"} bg-gray-200 h-4 rounded-full`}></div>
+                    <div className={`self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"} bg-gray-200 h-4 rounded-full`}></div>
+                    <div className={`self-stretch ${size==1 ? "text-sm" : size==2 ? "text-base" : size==3 ? "text-lg" : size==4 && "text-xl"} bg-gray-200 h-4 rounded-full`}></div>
                 </div>
             </div >
         )

@@ -50,7 +50,7 @@ export default function Header({ handleClick, information, logout, changeSize }:
                     <p className="w-5 h-0.5 bg-black rounded-lg relative duration-700 delay-300"></p>
                 </div>
                 {show &&
-                    <div className="absolute bg-white rounded-lg shadow-xl top-7 right-4 px-4 py-4 flex flex-col gap-2">
+                    <div className="z-50 absolute bg-white rounded-lg shadow-xl top-7 right-4 px-4 py-4 flex flex-col gap-2">
                         <div className="flex flex-col px-2 py-1 border-b-2 border-[#EEEDED]">
                             <p className="text-sm">高本龍信</p>
                             <p className="text-sm">22歳</p>
