@@ -4,6 +4,7 @@ import DaysCount from "@/components/Calendar/DaysCount";
 import Home from "@/components/Home/Home";
 import Calendar from "@/components/Calendar/Calendar";
 import Chat from "@/components/Chat/Chat";
+import Hint from "@/components/Hint";
 
 import { useState, useEffect } from "react";
 import Image from 'next/image'
@@ -46,6 +47,7 @@ export default function Page() {
   const [size, setSize] = useState<number>(1);
   const [go, setGo] = useState<boolean>(false);
   const [date, setDate] = useState<Date>(new Date());
+  const [hintShow, setHintShow] = useState<boolean>(false)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async(authUser) => {
@@ -189,7 +191,6 @@ export default function Page() {
 
   useEffect(() => {
     console.log(detailData);
-    
   }, [detailData])
 
   return (
@@ -197,6 +198,7 @@ export default function Page() {
       <div className={`bg-white fixed top-0 left-0 h-full z-[99999] w-full ${hidden ? 'animate-[zoomOut_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]' : 'animate-[zoomIn_1.5s_cubic-bezier(0.25,1,0.5,1)_forwards]'} ${deleteDisp && 'hidden'}`}>
         <p className="fixed left-[33%] md:left-[43%] top-[45%] w-[280px]"><Image src="/logo.svg" alt="" width={150} height={150} /></p>
       </div>
+      {hintShow && <div className="fixed w-full h-full flex justify-center items-center z-[9999999]" onClick={() => setHintShow(!hintShow)}><Hint /></div>}
       {!user ? (
         // isLogin ? (
         //   <div className="h-screen w-screen flex flex-col gap-10 justify-center items-center">
@@ -224,6 +226,9 @@ export default function Page() {
           <Header handleClick={handleClick} information={userData} logout={logout} changeSize={(i:number) => setSize(i)} />
           <main className={`w-screen flex flex-col gap-9 items-center pt-2 ${size == 1 ? "text-base" : size==2 ? "text-lg" : size==3 ? "text-xl" : size==4 && "text-[22px]"}`}>
             <DaysCount diagnosis={diagnosis} />
+            <div className="absolute right-0 top-14 bg-white pr-4 pl-2 py-2 shadow-[0px_4px_24px_0px_rgba(0,0,0,0.15)] rounded-l-3xl duration-300 hover:bg-[#FFAF00]" onClick={() => setHintShow(!hintShow)}>
+              <Image src="/hint.svg" alt="" width={30} height={30} />
+            </div>
             {show == 'Home' ? (
               <Home detailData={detailData} underTreatment={underTreatment} size={size} />
             ) : (show == 'Calendar' ? (
